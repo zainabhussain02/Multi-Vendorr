@@ -1,28 +1,30 @@
-const express = require('express');
-const app = express();    
-const ErrorHandler = require("./utlis/ErrorHandler");  
+
+
+const express = require("express");
+const ErrorHandler = require("./middleware/error");
+const app = express();
 const cookieParser = require("cookie-parser");
-const bodyParser = require('body-parser');
-const cors=require("cors");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
+// app.use(cors());
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
-app.use(cookieParser()); 
-app.use(cors());
-app.use("/",express.static("uploads")); // Serve static files from the "uploads" directory
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+// app.use("/",express.static("upload"))
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
-
-//config
+// Config (fixed dotenv typo)
 if (process.env.NODE_ENV !== "PRODUCTION") {
-    require('dotenv').config();
-    path:"backend/config/.env";
+  require("dotenv").config({
+    path: "config/.env",
+  });
 }
 
-//import routes
-const user= require("./controller/user");
+//routes
+const user = require("./controller/user");
 app.use("/api/v2/user", user);
-//its for error handling
+// Error handling middleware
 app.use(ErrorHandler);
 
-
-module.exports = app;   
+module.exports = app;

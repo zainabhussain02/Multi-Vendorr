@@ -1,5 +1,8 @@
-const { text } = require("body-parser");
+
+
+
 const nodemailer = require("nodemailer");
+
 const sendMail = async (options) => {
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -9,6 +12,8 @@ const sendMail = async (options) => {
       user: process.env.SMTP_MAIL,
       pass: process.env.SMTP_PASSWORD,
     },
+  //   debug: true, // Enable debugging
+  // logger: true, // Log mesasages
   });
 
   const mailOptions = {
@@ -17,6 +22,7 @@ const sendMail = async (options) => {
     subject: options.subject,
     text: options.message,
   };
+
   await transporter.sendMail(mailOptions);
 };
 
