@@ -1,5 +1,3 @@
-
-
 const express = require("express");
 const ErrorHandler = require("./middleware/error");
 const app = express();
@@ -8,7 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 // app.use(cors());
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 // app.use("/",express.static("upload"))

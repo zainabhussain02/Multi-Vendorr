@@ -1,35 +1,38 @@
-
-
-
-
 const express = require("express");
 const path = require("path");
 const router = express.Router();
 const User = require("../model/user");
-const  upload = require("../multer");
+const upload = require("../multer");
 const ErrorHandler = require("../utlis/ErrorHandler");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const catchAsyncError = require("../middleware/catchAsyncErrors");
 const sendMail = require("../utlis/sendMail");
 const sendToken = require("../utlis/jwtToken");
-
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const { isAuthenticated } = require("../middleware/auth");
 // Create user
 router.post("/create-user", upload.single("file"), async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
     const userEmail = await User.findOne({ email });
+
     if (userEmail) {
-      const filename = req.file.filename;
+      const filename = req.file?.filename;
       const filePath = `uploads/${filename}`;
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.log(err);
-          res.status(500).json({ message: "Error deleting file" });
-        }
+      if (filename) {
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            console.log("Error deleting file:", err);
+          }
+        });
+      }
+
+      return res.status(400).json({
+        success: false,
+        message: "User already exists",
       });
-      return next(new ErrorHandler("User already exist", 400));
     }
 
     const fileUrl = path.join("uploads", req.file.filename); // ✅ FIXED LINE
@@ -61,7 +64,6 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
   }
 });
 
-
 // Create activation Token
 const createActivationToken = (user) => {
   return jwt.sign(user, process.env.ACTIVATION_SECRET, {
@@ -89,11 +91,11 @@ router.post(
       let user = await User.findOne({ email });
 
       if (user) {
-  return res.status(200).json({
-    success: true,
-    message: "Account already activated. Please log in.",
-  });
-}
+        return res.status(200).json({
+          success: true,
+          message: "Account already activated. Please log in.",
+        });
+      }
 
       user = await User.create({
         name,
@@ -106,6 +108,55 @@ router.post(
       await user.save();
 
       sendToken(user, 201, res);
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
+//login user
+router.post(
+  "/login-user",
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const { email, password } = req.body;
+      if (!email || !password) {
+        return next(new ErrorHandler("Please provide the all fileds", 400));
+      }
+      const user = await User.findOne({ email }).select("password");
+
+      if (!user) {
+        return next(new ErrorHandler("user doesn't exists", 400));
+      }
+      const isPasswordValid = await user.comparePassword(password);
+      if (!isPasswordValid) {
+        return next(
+          new ErrorHandler("Please provide the correct information", 400)
+        );
+      }
+
+      sendToken(user, 201, res);
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
+// login user
+router.get(
+  "/getuser",
+  isAuthenticated,
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const user = await User.findById(req.user.id);
+
+      if (!user) {
+        return next(new ErrorHandler("User done exist", 400));
+      }
+      res.status(200).json({
+        success: true,
+        user,
+      });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }

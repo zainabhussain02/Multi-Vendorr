@@ -1,14 +1,10 @@
-
-
-
-
-
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { server } from "../../server";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -29,15 +25,30 @@ const Signup = () => {
     newForm.append("password", password);
 
     try {
-      const res = await axios.post(`${server}/user/create-user`, newForm, config);
+      const res = await axios.post(
+        `${server}/user/create-user`,
+        newForm,
+        config
+      );
       console.log(res);
       if (res.data.success === true) {
-        alert(res.data.message);
-        navigate("/");
+        toast.success(res.data.message);
+        setName("");
+        setEmail("");
+        setPassword("");
+        setAvatar();
+        // alert(res.data.message);
+        // navigate("/");
       }
     } catch (err) {
-      console.log(err);
-      alert(err.response?.data?.message || "Signup failed.");
+      console.log("Signup error:", err); // Full error object
+      console.log("Error response from backend:", err.response);
+      console.log("Error message:", err.response?.data?.message);
+
+      const errorMessage =
+        err.response?.data?.message || "Something went wrong during signup.";
+
+      toast.error(errorMessage); // Show toast with backend message
     }
   };
 
@@ -58,7 +69,10 @@ const Signup = () => {
           <form className="space-y-6" onSubmit={handleSubmit}>
             {/* Name */}
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Full Name
               </label>
               <div className="mt-1">
@@ -75,7 +89,10 @@ const Signup = () => {
 
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Email address
               </label>
               <div className="mt-1">
@@ -92,7 +109,10 @@ const Signup = () => {
 
             {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Password
               </label>
               <div className="mt-1 relative">
@@ -122,7 +142,10 @@ const Signup = () => {
 
             {/* Avatar */}
             <div>
-              <label htmlFor="avatar" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="avatar"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Profile Picture
               </label>
               <div className="mt-2 flex items-center">

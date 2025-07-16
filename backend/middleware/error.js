@@ -1,11 +1,14 @@
 
 
-const mongoose = require("mongoose");
+const ErrorHandler = require("../utlis/ErrorHandler");
 
-const connectDatabase = () => {
-  mongoose.connect(process.env.DB_URL)
-    .then((data) => {
-      console.log(`mongodb connect with server:${data.connection.host}`);
-    });
+const errorMiddleware = (err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
+
+  res.status(err.statusCode).json({
+    success: false,
+    message: err.message, // ✅ send JSON message to frontend
+  });
 };
-module.exports = connectDatabase;
+
+module.exports = errorMiddleware;
