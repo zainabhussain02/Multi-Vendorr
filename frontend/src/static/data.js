@@ -324,6 +324,7 @@ export const productData = [
     totalSell: 80,
     stock: 10,
   },
+  
   {
     id: 3,
     category: "Others",
@@ -382,9 +383,159 @@ export const productData = [
     rating: 5,
     totalSell: 49,
     stock: 10,
-  },      
+  },    
   {
     id: 5,
+    category: "Makeup Poducts",
+    name: "iPhone 14 Pro Max 256GB SSD and 8GB RAM silver color",
+    description:
+      "Product details are a crucial part of any eCommerce website or online marketplace. These details help potential customers to make informed decisions about the products they are interested in buying. A well-written product description can also be a powerful marketing tool that can help increase sales. Product details typically include information about the product's features, specifications, dimensions, weight, materials, and other relevant information that can help customers understand the product better. The product details section should also include high-quality images and videos of the product, as well as customer reviews and ratings.",
+    imageUrl: [
+      {
+        publicId: "test",
+        url: "https://m.media-amazon.com/images/I/61bK6PMOC3L._AC_SX679_.jpg",
+      },
+      {
+        publicId: "test",
+        url: "https://m.media-amazon.com/images/I/61bK6PMOC3L._AC_SX679_.jpg",
+      },
+    ],
+    shop: {
+      name: "Amazon Ltd",
+      shopAvatar: {
+        publicId: "test",
+        url: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+      },
+      ratings: 4.2,
+    },
+    discountPrice: 1099,
+    rating: 5,
+    totalSell: 80,
+    stock: 10,
+  },  
+
+{
+    id: 6,
+    category: "Shoes",
+    name: "New Trend shoes for gents with all sizes",
+    description: "Product details are a crucial part of any eCommerce website or online marketplace. These details help potential customers to make informed decisions about the products they are interested in buying. A well-written product description can also be a powerful marketing tool that can help increase sales. Product details typically include information about the product's features, specifications, dimensions, weight, materials, and other relevant information that can help customers understand the product better. The product details section should also include high-quality images and videos of the product, as well as customer reviews and ratings.",
+    imageUrl: [
+      {
+        publicId: "shoes1",
+        url: 
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvBQPQMVNRd6TtDkGs2dCri0Y-rxKkFOiEWw&usqp=CAU",
+      },
+      {
+        publicId: "shoes2",
+        url: "https://unsplash.com/photos/white-and-blue-nike-air-force-1-high-jvoZ-Aux9aw",
+      },
+    ],
+    shop: {
+      name: "Alisha Shoes Mart",
+      shopAvatar: {
+        publicId: "test",
+        url: "https://via.placeholder.com/150/000000/FFFFFF/?text=Amazon+Logo",
+      },
+      ratings: 4.2,
+    },
+    price: 120,
+    discountPrice: 89,
+    rating: 5,
+    totalSell: 49,
+    stock: 10,
+  },  
+  {
+    id: 7,
+    category: "Others",
+    name: "New Fashionable Watch for men 2023 with multiple colors",
+    description:
+      "Product details are a crucial part of any eCommerce website or online marketplace. These details help potential customers to make informed decisions about the products they are interested in buying. A well-written product description can also be a powerful marketing tool that can help increase sales. Product details typically include information about the product's features, specifications, dimensions, weight, materials, and other relevant information that can help customers understand the product better. The product details section should also include high-quality images and videos of the product, as well as customer reviews and ratings.",
+    imageUrl: [
+      {
+        publicId: "test",
+        url: "https://i0.wp.com/eccocibd.com/wp-content/uploads/2022/01/1802NL02_1.png?fit=550%2C550&ssl=1",
+      },
+      {
+        publicId: "test",
+        url: "https://i0.wp.com/eccocibd.com/wp-content/uploads/2022/01/1802NL02_1.png?fit=550%2C550&ssl=1",
+      },
+    ],
+    shop: {
+      name: "Shahriar Watch House",
+      shopAvatar: {
+        publicId: "test",
+        url: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+      },
+      ratings: 4.2,
+    },
+    price: 100,
+    discountPrice: 79,
+    rating: 4,
+    totalSell: 12,
+    stock: 10,
+  },  
+{
+    id: 8,
+    category: "Others",
+    name: "New Fashionable Watch for men 2023 with multiple colors",
+    description:
+      "Product details are a crucial part of any eCommerce website or online marketplace. These details help potential customers to make informed decisions about the products they are interested in buying. A well-written product description can also be a powerful marketing tool that can help increase sales. Product details typically include information about the product's features, specifications, dimensions, weight, materials, and other relevant information that can help customers understand the product better. The product details section should also include high-quality images and videos of the product, as well as customer reviews and ratings.",
+    imageUrl: [
+      {
+        publicId: "test",
+        url: "https://i0.wp.com/eccocibd.com/wp-content/uploads/2022/01/1802NL02_1.png?fit=550%2C550&ssl=1",
+      },
+      {
+        publicId: "test",
+        url: "https://i0.wp.com/eccocibd.com/wp-content/uploads/2022/01/1802NL02_1.png?fit=550%2C550&ssl=1",
+      },
+    ],
+    shop: {
+      name: "Shahriar Watch House",
+      shopAvatar: {
+        publicId: "test",
+        url: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+      },
+      ratings: 4.2,
+    },
+    price: 100,
+    discountPrice: 79,
+    rating: 4,
+    totalSell: 12,
+    stock: 10,
+  },
+  {
+    id: 9,
+    category: "Others",
+    name: "New Fashionable Watch for men 2023 with multiple colors",
+    description:
+      "Product details are a crucial part of any eCommerce website or online marketplace. These details help potential customers to make informed decisions about the products they are interested in buying. A well-written product description can also be a powerful marketing tool that can help increase sales. Product details typically include information about the product's features, specifications, dimensions, weight, materials, and other relevant information that can help customers understand the product better. The product details section should also include high-quality images and videos of the product, as well as customer reviews and ratings.",
+    imageUrl: [
+      {
+        publicId: "test",
+        url: "https://i0.wp.com/eccocibd.com/wp-content/uploads/2022/01/1802NL02_1.png?fit=550%2C550&ssl=1",
+      },
+      {
+        publicId: "test",
+        url: "https://i0.wp.com/eccocibd.com/wp-content/uploads/2022/01/1802NL02_1.png?fit=550%2C550&ssl=1",
+      },
+    ],
+    shop: {
+      name: "Shahriar Watch House",
+      shopAvatar: {
+        publicId: "test",
+        url: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+      },
+      ratings: 4.2,
+    },
+    price: 100,
+    discountPrice: 79,
+    rating: 4,
+    totalSell: 12,
+    stock: 10,
+  },
+  {
+    id: 10,
     category: "Music and Gaming",
     name: "Gaming Headphone Asus with multiple color and free delivery",
     description:

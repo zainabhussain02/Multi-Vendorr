@@ -1,10 +1,9 @@
-
-
-
-
+const path = require("path");
+const express = require("express");
 require("dotenv").config({ path: "backend/config/.env" });
 
 const app = require("./app");
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 const connectDatabase = require("./db/Database");
 
 // Handling uncaught exceptions

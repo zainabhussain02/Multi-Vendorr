@@ -1,16 +1,22 @@
-
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
 import { productData, categoriesData } from "../../static/data";
-import { AiOutlineHeart, AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
+import {
+  AiOutlineHeart,
+  AiOutlineSearch,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
 import DropDown from "./DropDown";
 import Navbar from "./Navbar";
-import{ CgProfile} from "react-icons/cg";
+import { CgProfile } from "react-icons/cg";
+import { useSelector } from "react-redux";
+import { backend_url } from "../../server";
 
 const Header = ({ activeHeading }) => {
+  const { isAuthenticated, user } = useSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState(null);
   const [active, setActive] = useState(false);
@@ -110,24 +116,26 @@ const Header = ({ activeHeading }) => {
           className={`${styles.section} relative ${styles.normalFlex} justify-between`}
         >
           {/* Categories */}
-          <div className="relative h-[60px] mt-[10px] w-[270px] hidden 1000px:block">
-            <BiMenuAltLeft size={30} className="absolute top-3 left-2" />
-            <button
-              className={`h-[100%] w-full justify-between items-center pl-10 bg-white font-sans text-lg font-[500] select-none rounded-t-md`}
-            >
-              All Categories
-            </button>
-            <IoIosArrowDown
-              size={20}
-              className="absolute right-2 top-4 cursor-pointer"
-              onClick={() => setDropDown(!dropdown)}
-            />
-            {dropdown ? (
-              <DropDown
-                categoriesData={categoriesData}
-                setDropDown={setDropDown}
+          <div onClick={() => setDropDown(!dropdown)}>
+            <div className="relative h-[60px] mt-[10px] w-[270px] hidden 1000px:block">
+              <BiMenuAltLeft size={30} className="absolute top-3 left-2" />
+              <button
+                className={`h-[100%] w-full justify-between items-center pl-10 bg-white font-sans text-lg font-[500] select-none rounded-t-md`}
+              >
+                All Categories
+              </button>
+              <IoIosArrowDown
+                size={20}
+                className="absolute right-2 top-4 cursor-pointer"
+                onClick={() => setDropDown(!dropdown)}
               />
-            ) : null}
+              {dropdown ? (
+                <DropDown
+                  categoriesData={categoriesData}
+                  setDropDown={setDropDown}
+                />
+              ) : null}
+            </div>
           </div>
           {/* navItems */}
 
@@ -135,53 +143,48 @@ const Header = ({ activeHeading }) => {
             <Navbar active={activeHeading} />
           </div>
 
-
-
-
-<div className="flex">
-          <div className={`${styles.normalFlex}`}> 
-            <div className="relative cursor-pointer mr-[15px">
-              <AiOutlineHeart
-              size={30}
-              color="rgb(255 255 255 / 834)"
-              />
-              <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
-                0
-              </span>
+          <div className="flex">
+            <div className={`${styles.normalFlex}`}>
+              <div className="relative cursor-pointer mr-[15px">
+                <AiOutlineHeart size={30} color="rgb(255 255 255 / 834)" />
+                <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+                  0
+                </span>
+              </div>
             </div>
 
+            <div className={`${styles.normalFlex}`}>
+              <div className="relative cursor-pointer mr-[15px">
+                <AiOutlineShoppingCart
+                  size={30}
+                  color="rgb(255 255 255 / 834)"
+                />
+                <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+                  1
+                </span>
+              </div>
+            </div>
+
+            <div className={`${styles.normalFlex}`}>
+              <div className="relative cursor-pointer mr-[15px]">
+                {isAuthenticated ? (
+                  <Link to="/profile">
+                    <img
+                      src={`${backend_url}${user?.avatar}`}
+                      alt="profile"
+                      className="w-[35px] h-[35px] rounded-full"
+                    />
+                  </Link>
+                ) : (
+                  <Link to="/login">
+                    <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
+                  </Link>
+                )}
+              </div>
+            </div>
           </div>
-
-
- <div className={`${styles.normalFlex}`}> 
-            <div className="relative cursor-pointer mr-[15px">
-              <AiOutlineShoppingCart
-              size={30}
-              color="rgb(255 255 255 / 834)"
-              />
-              <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
-                1
-              </span>
-            </div>
-</div>
-
-<div className={`${styles.normalFlex}`}> 
-            <div className="relative cursor-pointer mr-[15px]">
-              <Link to ="/login">
-              <CgProfile
-              size={30}
-              color="rgb(255 255 255 / 83%)"
-              />
-              </Link>
-              
-            </div>
-</div>
-          </div>
-
-          
         </div>
       </div>
-
     </>
   );
 };
