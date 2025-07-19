@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Header from "../components/Layout/Header";
 import Footer from "../components/Layout/Footer";
 import styles from "../styles/styles";
-// import styles from "../styles/style";
 
 const FaqPage = () => {
   window.scrollTo(0, 0);
