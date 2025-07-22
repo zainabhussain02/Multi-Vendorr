@@ -130,6 +130,8 @@ import {
   CheckoutPage,
   PaymentPage,
   OrderSuccessPage,
+  ProductDetailsPage,
+  ProfilePage,
 } from "./routes/Routes.js";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import ActivationPage from "./pages/ActivationPage";
@@ -175,6 +177,7 @@ const App = () => {
           <Route path="/sign-up" element={<SignupPage />} />
           <Route path="/activation/:activation_token" element={<ActivationPage />} />
           <Route path="/products" element={<ProductsPage />} />
+            <Route path="/product/:name" element={<ProductDetailsPage/>}/>
           <Route path="/best-selling" element={<BestSelingPage />} />
           <Route path="/events" element={<EventPage />} />
           <Route path="/faq" element={<FaqPage />} />
@@ -197,10 +200,18 @@ const App = () => {
   }
 />
           <Route
-            path="/order-success"
+            path="/order/success/:id"
             element={
               <ProtectedRoute>
                 <OrderSuccessPage />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
               </ProtectedRoute>
             }
           />

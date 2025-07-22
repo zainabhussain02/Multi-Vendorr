@@ -16,8 +16,8 @@ import { useSelector } from "react-redux";
 import { backend_url } from "../../server";
 import Cart from "../cart/Cart";
 import Wishlist from "../wishlist/Wishlist";
+import { RxCross2 } from "react-icons/rx";
 // import Wishlist from "../Wishlist/Wishlist";
-
 
 const Header = ({ activeHeading }) => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -25,9 +25,9 @@ const Header = ({ activeHeading }) => {
   const [searchData, setSearchData] = useState(null);
   const [active, setActive] = useState(false);
   const [dropdown, setDropDown] = useState(false);
-  const [openCart,setOpenCart] = useState(false);
-   const [openWishlist,setOpenWishlist] = useState(false);
-
+  const [openCart, setOpenCart] = useState(false);
+  const [openWishlist, setOpenWishlist] = useState(false);
+  const [open, setOpen] = useState(false);
   const handleSearchChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
@@ -115,7 +115,7 @@ const Header = ({ activeHeading }) => {
       {/* Sticky Header Bar */}
       <div
         className={`${
-          active ? "shadow-sm fixed top-0 left-0 z-10" : ""
+          active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
         } transition hidden 800px:flex items-center justify-between w-full bg-[#3321c8] h-[70px]`}
       >
         <div
@@ -151,9 +151,10 @@ const Header = ({ activeHeading }) => {
 
           <div className="flex">
             <div className={`${styles.normalFlex}`}>
-              <div className="relative cursor-pointer mr-[15px]"
-              onClick={()=>setOpenWishlist(true)}>
-                
+              <div
+                className="relative cursor-pointer mr-[15px]"
+                onClick={() => setOpenWishlist(true)}
+              >
                 <AiOutlineHeart size={30} color="rgb(255 255 255 / 834)" />
                 <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
                   0
@@ -162,10 +163,10 @@ const Header = ({ activeHeading }) => {
             </div>
 
             <div className={`${styles.normalFlex}`}>
-              <div className="relative cursor-pointer mr-[15px]"
-              onClick={()=>setOpenCart(true)}>
-                  
-
+              <div
+                className="relative cursor-pointer mr-[15px]"
+                onClick={() => setOpenCart(true)}
+              >
                 <AiOutlineShoppingCart
                   size={30}
                   color="rgb(255 255 255 / 83%)"
@@ -194,25 +195,108 @@ const Header = ({ activeHeading }) => {
               </div>
             </div>
             {/* {cart popup} */}
-                     {
-                      openCart ? (
-                        <Cart setOpenCart={setOpenCart}/>
-                      ):null 
-                     }
-             {/* {cart popup} */}
+            {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
+            {/* {cart popup} */}
 
-              {/* {wishList popup} */}
-                     {
-                      openWishlist ? (
-                        <Wishlist setOpenWishlist={setOpenWishlist}/>
-                      ):null 
-                     }
-             {/* {wishList popup} */}
+            {/* {wishList popup} */}
+            {openWishlist ? (
+              <Wishlist setOpenWishlist={setOpenWishlist} />
+            ) : null}
+            {/* {wishList popup} */}
           </div>
         </div>
+      </div>
+
+      {/* mobile screen header */}
+      <div
+        className={` ${
+          active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
+        } w-full h-[60px]  bg-[#fff] z-50 top-0 left-0 shadow-sm 800px:hidden`}
+      >
+        <div className="w-full flex items-center justify-between">
+          <div>
+            <BiMenuAltLeft
+              size={40}
+              className="ml-4"
+              onClick={() => setOpen(true)}
+            />
+          </div>
+          <div>
+            <Link to="/">
+              <img
+                src="https://shopo.quomodothemes.website/assets/images/logo.svg"
+                alt="Logo"
+                className="mt-3 cursor-pointer"
+              />
+            </Link>
+          </div>
+          <div>
+            <div className="relative mr-[20px]">
+              <AiOutlineShoppingCart size={30} />
+              <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+                1
+              </span>
+            </div>
+          </div>
+        </div>
+        {/* header sidebar popup */}
+        {open && (
+          <div
+            className={` fixed w-full bg-[#0000005f] z-20 h-full top-0 left-0`}
+          >
+            <div className="fixed w-[60%]  bg-[#fff] top-0 h-screen left-0 z-10 overflow-y-scroll">
+              <div className="w-full justify-between flex pr-3">
+                <div>
+                  <div className="relative mr-[15px]">
+                    <AiOutlineHeart size={30} className="mt-5 ml-3" />
+                    <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+                      0
+                    </span>
+                  </div>
+                </div>
+                <RxCross2
+                  size={30}
+                  className="ml-4 mt-5"
+                  onClick={() => setOpen(false)}
+                />
+              </div>
+              <div className="my-8 w-[92%] m-auto h-[40px] relative">
+                <input
+                  type="text"
+                  placeholder="Search Product..."
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  className="h-[40px] w-full px-2 border-[#0e2fc3] border-[2px] rounded-md"
+                />
+                {searchData && (
+                  <div className="absolute bg-[#fff]  z-10 shadow w-full left-0 p-3">
+                    {searchData.map((i) => {
+                      const d = i.name;
+                      const Product_name = d.replace(/\s+/g, "-");
+                      return (
+                        <Link to={`/product/${Product_name}`}>
+                          <div className="flex items-center">
+                            <img
+                              src={i.imageUrl[0].url}
+                              alt=""
+                              className="w-[50px] mr-2"
+                            />
+                            <h5>{i.name}</h5>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
 };
 
 export default Header;
+
+// 3:21:07

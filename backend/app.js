@@ -58,6 +58,10 @@ app.use("/api/v2/user", user);
 const payment = require("./controller/payment.js"); // ✅ Added
 app.use("/api/v2/payment", payment);            // ✅ Added
 
+
+const product = require("./controller/product");
+app.use("/api/v2/product", product);
+
 // Error Handler
 app.use(ErrorHandler);
 
