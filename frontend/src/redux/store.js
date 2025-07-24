@@ -23,12 +23,12 @@ import { eventReducer } from "./reducers/event";
 import { cartReducer } from "./reducers/cart";
 import { wishlistReducer } from "./reducers/wishlist";
 import { orderReducer } from "./reducers/order";
-
+import { sellerReducer } from "./reducers/seller";
 
 const Store = configureStore({
   reducer: {
     user: userReducer,
-    // seller: sellerReducer,
+    seller: sellerReducer,
     products: productReducer,
     events: eventReducer,
     cart: cartReducer,

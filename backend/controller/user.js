@@ -142,7 +142,7 @@ router.post(
   })
 );
 
-// login user
+// load user
 router.get(
   "/getuser",
   isAuthenticated,

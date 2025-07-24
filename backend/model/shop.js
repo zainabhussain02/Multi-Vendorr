@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
+
 const bcrypt = require("bcryptjs");
+const { JsonWebTokenError } = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
 
 const shopSchema = new mongoose.Schema({
@@ -42,36 +44,11 @@ const shopSchema = new mongoose.Schema({
       required: true,
     },
   },
+
   zipCode: {
     type: Number,
     required: true,
   },
-  withdrawMethod: {
-    type: Object,
-  },
-  availableBalance: {
-    type: Number,
-    default: 0,
-  },
-  transections: [
-    {
-      amount: {
-        type: Number,
-        required: true,
-      },
-      status: {
-        type: String,
-        default: "Processing",
-      },
-      createdAt: {
-        type: Date,
-        default: Date.now(),
-      },
-      updatedAt: {
-        type: Date,
-      },
-    },
-  ],
   createdAt: {
     type: Date,
     default: Date.now(),
