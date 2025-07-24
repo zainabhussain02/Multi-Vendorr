@@ -24,6 +24,7 @@ import {
   SellerActivationPage,
   ShopLoginPage,
 } from "./routes/Routes.js";
+import { ShopDashboardPage ,ShopCreateProduct } from "./routes/ShopRoutes.js";
 import ProtectedRoute from "./routes/ProtectedRoute";
 // import { ShopHomePage } from "./ShopRoutes"; // ✅ curly braces for named import
 import ShopHomePage from "./pages/ShopHomePage";
@@ -36,17 +37,16 @@ import axios from "axios";
 import { server } from "./server";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-// import { isSeller } from "../../backend/middleware/auth.js";
-import { useSelector } from "react-redux";
-import SellerProtectedRoute from "./routes/SellerProtectedRoute.js";
 
-// import { isSeller } from "../../backend/middleware/auth.js";
+import { useSelector, useDispatch } from "react-redux";
+import SellerProtectedRoute from "./routes/SellerProtectedRoute.js";
 
 const App = () => {
   const [stripeApiKey, setStripeApiKey] = useState("");
   const [loading, setLoading] = useState(true);
   const { isLoading, isSeller } = useSelector((state) => state.seller);
   // const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   async function getStripeApiKey() {
     try {
@@ -57,17 +57,27 @@ const App = () => {
     }
   }
 
+  // useEffect(() => {
+  //   const init = async () => {
+  //     await Store.dispatch(loadUser());
+  //     await Store.dispatch(loadSeller());
+  //     await getStripeApiKey();
+  //     setLoading(false);
+  //   };
+  //   init();
+  // }, []);
+
   useEffect(() => {
     const init = async () => {
-      await Store.dispatch(loadUser());
-      await Store.dispatch(loadSeller());
+      await dispatch(loadUser());
+      await dispatch(loadSeller());
       await getStripeApiKey();
       setLoading(false);
     };
     init();
-  }, []);
+  }, [dispatch]);
 
-  if (loading || isLoading) return null;
+  // if (loading || isLoading) return null;
   return (
     <>
       <BrowserRouter>
@@ -147,7 +157,22 @@ const App = () => {
               </SellerProtectedRoute>
             }
           />
-          ;
+          <Route
+            path="/dashboard"
+            element={
+              <SellerProtectedRoute>
+                <ShopDashboardPage />
+              </SellerProtectedRoute>
+            }
+          />
+           <Route
+            path="/dashboard-create-product"
+            element={
+              <SellerProtectedRoute>
+                <ShopCreateProduct />
+              </SellerProtectedRoute>
+            }
+          />
         </Routes>
 
         <ToastContainer

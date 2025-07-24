@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "../components/Layout/Footer";
 import Header from "../components/Layout/Header";
 import Lottie from "react-lottie";
-// import animationData from "../Assets/animations/107043-success.json";
+import animationData from "../Assests/animations/107043-success (1).json";
 
 const OrderSuccessPage = () => {
   return (
@@ -18,7 +18,7 @@ const Success = () => {
   const defaultOptions = {
     loop: false,
     autoplay: true,
-    // animationData: animationData,
+    animationData: animationData,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
