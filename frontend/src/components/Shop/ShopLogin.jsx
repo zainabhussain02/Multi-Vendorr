@@ -23,12 +23,17 @@ const ShopLogin = () => {
         },
         { withCredentials: true }
       )
+      
       .then((res) => {
-        toast.success("Login Success!");
-        navigate(`/shop/${res.data.seller._id}`);
-        // navigate("/");
-        // window.location.reload(true);
-      })
+  if (res.data.seller) {
+    toast.success("Login Success!");
+    localStorage.setItem("seller", JSON.stringify(res.data.seller));
+    navigate(`/shop/${res.data.seller._id}`);
+  } else {
+    toast.error("Seller not found!");
+  }
+})
+
       .catch((err) => {
         console.log("Login error:", err); // optional for debugging
 
