@@ -9,8 +9,6 @@
 
 // module.exports = mongoose.model("Product", productSchema);
 
-
-
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
@@ -28,7 +26,7 @@ const productSchema = new mongoose.Schema({
   },
   tags: {
     type: String,
-      required: [true, "Please enter your product tags!"],
+   
   },
   originalPrice: {
     type: Number,
@@ -43,12 +41,10 @@ const productSchema = new mongoose.Schema({
   },
   images: [
     {
-      
-        type: String,
-       
-      },
-    ],
-      
+      type: String,
+    },
+  ],
+
   // reviews: [
   //   {
   //     user: {
