@@ -31,5 +31,6 @@ export{
   ShopCreatePage,
   SellerActivationPage,
   ShopLoginPage,
+
 }
     

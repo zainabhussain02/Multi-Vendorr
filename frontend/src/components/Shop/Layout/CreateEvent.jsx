@@ -49,8 +49,8 @@ const CreateEvent = () => {
       toast.error(error);
     }
     if (success) {
-      toast.success("Product created sucessfully!");
-      navigate("/dashboard");
+      toast.success("Event created sucessfully!");
+      navigate("/dashboard-events");
       window.location.reload();
     }
   }, [dispatch, error, success]);
