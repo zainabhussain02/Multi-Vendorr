@@ -88,6 +88,7 @@ import { MdOutlineLocalOffer } from "react-icons/md";
 import { FiPackage, FiShoppingBag } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import downloadImg from '../../../Assests/download.png';
 import { BiMessageSquareDetail } from "react-icons/bi";
 
 const DashboardHeader = () => {
@@ -96,11 +97,15 @@ const DashboardHeader = () => {
     <div className="w-full h-[80px] bg-white shadow sticky top-0 left-0 z-30 flex items-center justify-between px-4">
       <div  >
         <Link to="/dashboard">
-          <img
-            src="https://shopo.quomodothemes.website/assets/images/logo.svg"
-            alt=""
-          />
+          {/* <img
+            // src="https://shopo.quomodothemes.website/assets/images/logo.svg"
+            src="/Assests/download.png"
+            alt="hh"
+          /> */}
+           <img src={downloadImg} alt="Download Image"
+             className="w-40 ml-0" />
         </Link>
+
       </div>
       <div className="flex items-center">
         <div className="flex items-center mr-4">

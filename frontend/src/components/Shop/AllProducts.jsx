@@ -117,8 +117,6 @@
 
 // export default AllProducts;
 
-
-
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getAllProductsShop } from "../../redux/actions/product";
@@ -139,10 +137,10 @@ const AllProducts = () => {
     }
   }, [dispatch, seller]);
 
-  const handleDelete=(id)=>{
+  const handleDelete = (id) => {
     dispatch(deleteProduct(id));
     window.location.reload();
-  }
+  };
 
   const columns = [
     {
@@ -207,9 +205,7 @@ const AllProducts = () => {
         const product_name = params.row.name.replace(/\s+/g, "-");
         return (
           <Link to={`/product/${product_name}`}>
-            <Button
-            onClick={()=>handleDelete(params.id)}
-            >
+            <Button onClick={() => handleDelete(params.id)}>
               <AiOutlineDelete size={20} />
             </Button>
           </Link>

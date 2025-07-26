@@ -17,6 +17,8 @@ import { backend_url } from "../../server";
 import Cart from "../cart/Cart";
 import Wishlist from "../wishlist/Wishlist";
 import { RxCross2 } from "react-icons/rx";
+// import downloadImg from '../../../Assests/download.png';
+import downloadImg from "../../Assests/download.png";
 // import Wishlist from "../Wishlist/Wishlist";
 
 const Header = ({ activeHeading }) => {
@@ -28,6 +30,7 @@ const Header = ({ activeHeading }) => {
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setOpenWishlist] = useState(false);
   const [open, setOpen] = useState(false);
+  
   const handleSearchChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
@@ -60,10 +63,8 @@ const Header = ({ activeHeading }) => {
           {/* Logo */}
           <div>
             <Link to="/">
-              <img
-                src="https://shopo.quomodothemes.website/assets/images/logo.svg"
-                alt="Logo"
-              />
+               <img src={downloadImg} alt="Download Image"
+                           className="w-40 ml-0" />
             </Link>
           </div>
 

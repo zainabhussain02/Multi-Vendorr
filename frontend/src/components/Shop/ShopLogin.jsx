@@ -29,7 +29,7 @@ const ShopLogin = () => {
     toast.success("Login Success!");
     localStorage.setItem("seller", JSON.stringify(res.data.seller));
     navigate("/dashboard");
-    // window.location.reload(true);
+    window.location.reload(true);
   } else {
     toast.error("Seller not found!");
   }
