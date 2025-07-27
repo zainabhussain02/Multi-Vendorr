@@ -80,16 +80,15 @@ const CreateProduct = () => {
           <label className="p-2">
             Description <span className="text-red-500">*</span>
           </label>
-         <textarea
-  cols="30"
-  rows="8"
-  name="description"
-  value={description}
-  className="mt-2 appearance-none block w-full pt-2 px-3 border border-gray-400 rounded-[3px] placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-  onChange={(e) => setDescription(e.target.value)}
-  placeholder="Enter your product description ..."
-></textarea>
-
+          <textarea
+            cols="30"
+            rows="8"
+            name="description"
+            value={description}
+            className="mt-2 appearance-none block w-full pt-2 px-3 border border-gray-400 rounded-[3px] placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Enter your product description ..."
+          ></textarea>
         </div>
         <br />
         <div>

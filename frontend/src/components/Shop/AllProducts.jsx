@@ -117,7 +117,7 @@
 
 // export default AllProducts;
 
-import React, { useEffect,useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getAllProductsShop } from "../../redux/actions/product";
 import { Link } from "react-router-dom";
@@ -125,10 +125,11 @@ import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import { Button } from "@mui/material";
 import Loader from "./Layout/Loader";
 import { DataGrid } from "@mui/x-data-grid";
-import styles from "../../styles/styles";
+
+
 
 const AllProducts = () => {
-  const [open,setOpen]=useState(false);
+  
   const { products, isLoading } = useSelector((state) => state.products);
   const { seller } = useSelector((state) => state.seller);
   const dispatch = useDispatch();
@@ -232,13 +233,7 @@ const AllProducts = () => {
         <Loader />
       ) : (
         <div className="w-full mx-8 pt-1 mt-10 bg-white">
-          <div className="w-full flex justify-end" >
-            <div className={`${styles.button} !w-[180px] ml-[170px]`}
-            onClick={()=>setOpen(true)}>
-            
-              <span className="text-white">Create Coupon Code</span>
-            </div>
-          </div>
+         
           <DataGrid
             rows={rows}
             columns={columns}
@@ -246,13 +241,7 @@ const AllProducts = () => {
             disableRowSelectionOnClick
             autoHeight
           />
-          {
-            open && (
-              <div className="fixed top-0 left-o w-full h-screen bg-[#00000062] z-[20000] flex items-center justify-center">
-                <div className= "w-[90%] 800px:w-[40%]  h-[80vh] bg-white rounded-md shadow"></div>
-              </div>
-            )
-          }
+          
         </div>
       )}
     </>
