@@ -24,7 +24,7 @@ import {
   SellerActivationPage,
   ShopLoginPage,
 } from "./routes/Routes.js";
-import { ShopDashboardPage ,ShopCreateProduct,ShopAllProducts,ShopCreateEvents ,ShopAllEvents,ShopAllCoupouns } from "./routes/ShopRoutes.js";
+import { ShopDashboardPage ,ShopCreateProduct,ShopAllProducts,ShopCreateEvents ,ShopAllEvents,ShopAllCoupouns ,ShopPreviewPage} from "./routes/ShopRoutes.js";
 import ProtectedRoute from "./routes/ProtectedRoute";
 // import { ShopHomePage } from "./ShopRoutes"; // ✅ curly braces for named import
 import ShopHomePage from "./pages/ShopHomePage";
@@ -140,6 +140,7 @@ const App = () => {
               </ProtectedRoute>
             }
           /> */}
+           <Route path="/shop/preview/:id" element={<ShopPreviewPage />} />
           <Route path="/shop-login" element={<ShopLoginPage />} />
           <Route
             path="/shop-create"

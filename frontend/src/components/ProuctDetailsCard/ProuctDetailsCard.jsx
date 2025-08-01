@@ -30,6 +30,8 @@ import styles from "../../styles/styles";
 import { AiOutlineMessage, AiOutlineShoppingCart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import { backend_url } from "../../server";
 
 const ProductDetailsCard = ({ setOpen, data }) => {
   const [count, setCount] = useState(1);
@@ -47,6 +49,8 @@ const ProductDetailsCard = ({ setOpen, data }) => {
   const incrementCount = () => {
     setCount(count + 1);
   };
+   console.log("data:", data);
+  console.log("shop id:", data?.shop?._id);
   return (
     <>
       {data ? (
@@ -63,13 +67,14 @@ const ProductDetailsCard = ({ setOpen, data }) => {
               <div className="w-full 800px:w-[50%]">
                 {/* Product Image */}
                 {data?.imageUrl?.[0]?.url ? (
-                  <img src={data.imageUrl[0].url} alt={data.name} />
+                  // <img src={data.imageUrl[0].url} alt={data.name} />
+                  
+<img src={`${backend_url}${data?.imageUrl?.[0]?.url}`} alt={data.name} />
                 ) : (
                   <p className="text-red-500">No image available</p>
                 )}
-
                 {/* Shop Avatar */}
-                <div className="flex mt-2">
+                {/* <div className="flex mt-2">
                   {data?.shop?.shopAvatar?.url ? (
                     <img
                       src={data.shop.shopAvatar.url}
@@ -86,7 +91,30 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                       ( {data.shop.ratings}) Ratings
                     </h5>
                   </div>
-                </div>
+                </div> */}
+               
+                <Link
+                  to={`/shop/preview/${data.shop._id}`}
+                  className="flex mt-2 items-center"
+                >
+                  {data?.shop?.shopAvatar?.url ? (
+                    <img
+                      src={data.shop.shopAvatar.url}
+                      alt="Shop Avatar"
+                      className="w-[50px] h-[50px] rounded-full mr-2"
+                    />
+                  ) : (
+                    <p className="text-red-500">No avatar</p>
+                  )}
+
+                  <div>
+                    <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>
+                    <h5 className="pb-3 text-[15px]">
+                      ({data.shop.ratings}) Ratings
+                    </h5>
+                  </div>
+                </Link>
+                {/* message */}
                 <div
                   className={`${styles.button} bg-black mt-4 rounded-[4px] h-11`}
                   onClick={handleMessageSubmit}

@@ -20,7 +20,7 @@ const HomePage = () => {
        <Events/>
        <FeaturedProduct/>
        <Sponsored/>
-       {/* <Footer/> */}
+      
        <Footer/>
        
          </div>
